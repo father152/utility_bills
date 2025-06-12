@@ -7,7 +7,7 @@ import Hotwater from "./Components/Navbar/Hotwater/Hotwater";
 import Gas from "./Components/Navbar/Gas/Gas";
 import Elektr from "./Components/Navbar/Elektr/Elektr";
 import Teplo from "./Components/Navbar/Teplo/Teplo";
-
+import Rospodil from "./Components/Navbar/Rospodil/Rospodil";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,6 +42,10 @@ function App() {
         {
           path: "teplo",
           element: <Teplo />,
+        },
+        {
+          path: "rospodil",
+          element: <Rospodil />,
         },
       ],
     },

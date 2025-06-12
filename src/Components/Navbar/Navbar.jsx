@@ -31,7 +31,7 @@ export default function Navbar() {
             <Link to="/">
               <li>Вивіз сміття</li>
             </Link>
-            <Link to="/">
+            <Link to="/rospodil">
               <li>Розподіл газу</li>
             </Link>
           </ul>
