@@ -1,0 +1,7 @@
+.golovna{
+    display: flex;
+    width: 75%;
+    height: calc(100% - 200px);
+    
+    
+}

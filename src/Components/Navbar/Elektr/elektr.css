@@ -1,0 +1,22 @@
+.elektr {
+  display: flex;
+  width: 75%;
+  
+ 
+  height: calc(100vh + 100px);
+  position: relative;
+background-image: url("./elektro.jpg");
+background-repeat: no-repeat;
+background-size: cover
+}
+
+.elektr h3 {
+  position: absolute;
+  top: 180px;
+  left: 530px;
+  color: rgb(236, 81, 9);
+  font-size: 50px;
+  font-weight: 600;
+  font-family: "Manrope", sans-serif;
+  text-align: center;
+}

@@ -1,0 +1,23 @@
+.water {
+  display: flex;
+  width: 75%;
+  
+ 
+  height: calc(100vh + 100px);
+  position: relative;
+background-image: url("./7b3ab59dd9d1e6a276ae930350d9c529.jpg!w700wp");
+background-repeat: no-repeat;
+background-size: cover
+}
+
+h3 {
+  position: absolute;
+  top: 180px;
+  left: 530px;
+  color: rgb(38, 83, 231);
+  font-size: 50px;
+  font-weight: 600;
+  font-family: "Manrope", sans-serif;
+  text-align: center;
+}
+

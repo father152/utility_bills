@@ -1,0 +1,35 @@
+.forma {
+   
+    width: 40%;
+     height: calc(100vh + 100px);
+    font-family: "Manrope", sans-serif;
+    font-size: 18px;
+   
+
+  
+}
+.counter{
+    width: 100%;
+    height: calc(100vh - 0px);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+label {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 10px 0 10px 0;
+    font-family: "Manrope", sans-serif;
+}
+input {
+    
+    margin: 0 auto;
+    border-radius: 5px;
+    border: 1px solid #000;
+    padding-left: 10px;
+    font-size: 15px;
+    font-family: "Manrope", sans-serif;
+}

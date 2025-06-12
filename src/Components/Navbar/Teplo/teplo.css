@@ -1,0 +1,20 @@
+.teplo {
+  display: flex;
+  width: 75%;
+  height: calc(100vh + 100px);
+  position: relative;
+background-image: url("./stock-photo-house-heating-battery-maximum-heating-power-setting-man-hand-adjusting.jpg");
+background-repeat: no-repeat;
+background-size: cover
+}
+
+.teplo h3 {
+  position: absolute;
+  top: 180px;
+  left: 430px;
+  color: rgb(236, 9, 9);
+  font-size: 50px;
+  font-weight: 600;
+  font-family: "Manrope", sans-serif;
+  text-align: center;
+}

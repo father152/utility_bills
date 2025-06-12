@@ -1,0 +1,22 @@
+.gas {
+  display: flex;
+  width: 75%;
+  
+ 
+  height: calc(100vh + 100px);
+  position: relative;
+background-image: url("./zamina_kranu_hazovoi_plyty_1.jpeg");
+background-repeat: no-repeat;
+background-size: cover
+}
+
+.gas h3 {
+  position: absolute;
+  top: 180px;
+  left: 530px;
+  color: rgb(208, 228, 28);
+  font-size: 50px;
+  font-weight: 600;
+  font-family: "Manrope", sans-serif;
+  text-align: center;
+}
