@@ -12,6 +12,7 @@ export default function Elektr() {
             <Forma />
             <h3>
              Електроенергія</h3>
+             
             </div>
   )
 }
