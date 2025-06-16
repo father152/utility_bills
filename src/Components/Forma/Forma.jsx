@@ -5,7 +5,7 @@ export default function Forma() {
     const totalValue = parseFloat(document.getElementById("total").value) || 0;
     const ndsInput = document.getElementById("nds");
     ndsInput.value = (totalValue * 0.2).toFixed(2);
-    };
+  };
 
   const total = () => {
     const volume =
@@ -14,10 +14,7 @@ export default function Forma() {
     const totalInput = document.getElementById("total");
     totalInput.value = (volume * cost).toFixed(2);
     nds(); // Update NDS whenever total is recalculated
-    
   };
-  
-
   const totalpokasnuku = () => {
     const volumebefore =
       parseFloat(document.getElementById("beforevolume").value) || 0;
@@ -27,10 +24,6 @@ export default function Forma() {
     pokasnukuInput.value = (volumenow - volumebefore).toFixed(2);
     total();
   };
-
-
-
-
 
   return (
     <div className="forma">
@@ -70,9 +63,8 @@ export default function Forma() {
           className="total"
           id="total"
           type="number"
-           onChange={total}
+          onChange={total}
         ></input>{" "}
-       
       </div>
     </div>
   );

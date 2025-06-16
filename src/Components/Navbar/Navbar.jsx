@@ -37,7 +37,7 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="summary">
-          <label> Всього до оплати</label>
+          <label> Всього до cплати</label>
           <input
             className="volume"
             id="summary"
