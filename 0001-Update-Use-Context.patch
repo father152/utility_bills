@@ -1,0 +1,222 @@
+commit d78c5a8aea081ada91afe671d1501748a9bca5c1
+Author: vladimir.tsimbalenko <vladimir.tsimbalenko@alteryx.com>
+Date:   Mon Jun 16 14:07:35 2025 +0300
+
+    Update: Use Context
+
+diff --git a/src/Components/Forma/Forma.jsx b/src/Components/Forma/Forma.jsx
+index 1f17a12..8cb3bda 100644
+--- a/src/Components/Forma/Forma.jsx
++++ b/src/Components/Forma/Forma.jsx
+@@ -1,29 +1,34 @@
+ import "./forma.css";
++import {useCallback, useEffect, useState} from "react";
++import {FIELD_KEY} from "../../constants/index.js";
+ 
+-export default function Forma() {
+-  const nds = () => {
+-    const totalValue = parseFloat(document.getElementById("total").value) || 0;
+-    const ndsInput = document.getElementById("nds");
+-    ndsInput.value = (totalValue * 0.2).toFixed(2);
+-  };
++export default function Forma({ pageKey, setGlobalState, globalState}) {
++  const [ndsValue, setNdsValue] = useState(globalState[pageKey]?.[FIELD_KEY.NDS])
++  const [totalValue, setTotalValue] = useState(globalState[pageKey]?.[FIELD_KEY.TOTAL])
++  const [beforeValue, setBeforeValue] = useState(globalState[pageKey]?.[FIELD_KEY.BEFORE]);
++  const [nowValue, setNowValue] = useState(globalState[pageKey]?.[FIELD_KEY.NOW]);
++  const [differenceValue, setDifferenceValue] = useState();
++  const [priceValue, setPriceValue] = useState(globalState[pageKey]?.[FIELD_KEY.PRICE]);
++  useEffect(() => {
++    const diffValue = (nowValue - beforeValue).toFixed(2);
++    setDifferenceValue(diffValue);
++    setTotalValue(diffValue * priceValue)
++  }, [beforeValue, priceValue, nowValue]);
+ 
+-  const total = () => {
+-    const volume =
+-      parseFloat(document.getElementById("totalvolume").value) || 0;
+-    const cost = parseFloat(document.getElementById("cost").value) || 0;
+-    const totalInput = document.getElementById("total");
+-    totalInput.value = (volume * cost).toFixed(2);
+-    nds(); // Update NDS whenever total is recalculated
+-  };
+-  const totalpokasnuku = () => {
+-    const volumebefore =
+-      parseFloat(document.getElementById("beforevolume").value) || 0;
+-    const volumenow =
+-      parseFloat(document.getElementById("nowvolume").value) || 0;
+-    const pokasnukuInput = document.getElementById("totalvolume");
+-    pokasnukuInput.value = (volumenow - volumebefore).toFixed(2);
+-    total();
+-  };
++  useEffect(() => {
++    setNdsValue((totalValue * 0.2).toFixed(2));
++  }, [totalValue]);
++  const onChange = useCallback(handler => event => {
++    setGlobalState(prevState => ({
++      ...prevState,
++      [pageKey]: {
++        ...prevState[pageKey],
++        [event.target.id]: event.target.value ? parseFloat(event.target.value) : 0
++
++      }
++    }))
++    handler(event.target.value)
++  }, [pageKey, setGlobalState])
+ 
+   return (
+     <div className="forma">
+@@ -31,39 +36,44 @@ export default function Forma() {
+         <label> Введіть попередні показники</label>
+         <input
+           className="volume"
+-          id="beforevolume"
++          id={FIELD_KEY.BEFORE}
+           type="number"
+-          onChange={totalpokasnuku}
++          value={beforeValue}
++          onChange={onChange(setBeforeValue)}
+         ></input>{" "}
+         <label> Введіть показники</label>
+         <input
+           className="volume"
+-          id="nowvolume"
++          id={FIELD_KEY.NOW}
+           type="number"
+-          onChange={totalpokasnuku}
++          value={nowValue}
++          onChange={onChange(setNowValue)}
+         ></input>{" "}
+         <label> Різниця</label>
+         <input
+           className="volume"
+-          id="totalvolume"
++          id={FIELD_KEY.TOTAL}
+           type="number"
++          value={differenceValue}
+           readOnly
+         ></input>{" "}
+         <label>Введіть ціну (грн.)</label>
+         <input
+           className="cost"
+-          id="cost"
++          id={FIELD_KEY.PRICE}
+           type="number"
+-          onChange={total}
++          value={priceValue}
++          onChange={onChange(setPriceValue)}
+         ></input>{" "}
+         <label>ПДВ (грн.)</label>
+-        <input className="nds" id="nds" type="number" readOnly></input>
++        <input className="nds" id="nds" type="number" readOnly value={ndsValue}></input>
+         <label>До сплати (грн.)</label>
+         <input
+           className="total"
+           id="total"
+           type="number"
+-          onChange={total}
++          value={totalValue}
++          readOnly
+         ></input>{" "}
+       </div>
+     </div>
+diff --git a/src/Components/Layout/Layout.jsx b/src/Components/Layout/Layout.jsx
+index 9b69c58..be9197a 100644
+--- a/src/Components/Layout/Layout.jsx
++++ b/src/Components/Layout/Layout.jsx
+@@ -4,16 +4,20 @@ import Navbar from "../Navbar/Navbar";
+ import Footer from "../Footer/Footer";
+ import "./layout.css";
+ import { useState } from "react";
++import {FIELD_KEY, PAGE_KEY} from "../../constants/index.js";
+ 
+  
+ export default function Layout() {
+  const [globalState, setGlobalState] = useState(
+-    { elektr: { total: 0, nds: 0 }, total: 0 },
+-    { gas: { total: 0, nds: 0 }, total: 0 },
+-    { hotwater: { total: 0, nds: 0 }, total: 0 },
+-    { rospodil: { total: 0, nds: 0 }, total: 0 },
+-    { teplo: { total: 0, nds: 0 }, total: 0 },
+-    { water: { total: 0, nds: 0 }, total: 0 }
++   {
++     [PAGE_KEY.GAS]: {
++       [FIELD_KEY.TOTAL]: 0, [FIELD_KEY.NDS]: 0, [FIELD_KEY.BEFORE]: 0, [FIELD_KEY.NOW]: 0, [FIELD_KEY.PRICE]: 0
++     },
++     [PAGE_KEY.ELECTRICITY]: {
++       [FIELD_KEY.TOTAL]: 0, [FIELD_KEY.NDS]: 0, [FIELD_KEY.BEFORE]: 0, [FIELD_KEY.NOW]: 0, [FIELD_KEY.PRICE]: 0
++     },
++     total: 0
++   }
+   );
+ 
+   return (
+diff --git a/src/Components/Navbar/Elektr/Elektr.jsx b/src/Components/Navbar/Elektr/Elektr.jsx
+index 8abacd3..874899f 100644
+--- a/src/Components/Navbar/Elektr/Elektr.jsx
++++ b/src/Components/Navbar/Elektr/Elektr.jsx
+@@ -1,15 +1,19 @@
+ import Forma from "../../Forma/Forma"
+ import"./elektr.css"
++import {useOutletContext} from "react-router";
++import {PAGE_KEY} from "../../../constants/index.js";
+ 
+ 
+ export default function Elektr() {
++  const { globalState, setGlobalState } = useOutletContext();
++
+   return (
+     <div className="elektr">
+             <div className='kran'>
+            
+           
+         </div>
+-            <Forma />
++            <Forma pageKey={PAGE_KEY.ELECTRICITY} globalState={globalState} setGlobalState={setGlobalState}  />
+             <h3>
+              Електроенергія</h3>
+              
+diff --git a/src/Components/Navbar/Gas/Gas.jsx b/src/Components/Navbar/Gas/Gas.jsx
+index 5c1e072..c87166e 100644
+--- a/src/Components/Navbar/Gas/Gas.jsx
++++ b/src/Components/Navbar/Gas/Gas.jsx
+@@ -1,16 +1,19 @@
+ 
+ import Forma from '../../Forma/Forma'
+ import './gas.css'
++import {useOutletContext} from "react-router";
++import {PAGE_KEY} from "../../../constants/index.js";
+ import "../../../
+ 
+ export default function Gas() {
++  const { globalState, setGlobalState } = useOutletContext();
+   return (
+     <div className="gas">
+             <div className='kran'>
+            
+           
+         </div>
+-            <Forma />
++            <Forma pageKey={PAGE_KEY.GAS} globalState={globalState} setGlobalState={setGlobalState}  />
+             <h3>
+              Газопостачання</h3>
+             </div>
+diff --git a/src/constants/index.js b/src/constants/index.js
+new file mode 100644
+index 0000000..65a49c4
+--- /dev/null
++++ b/src/constants/index.js
+@@ -0,0 +1,12 @@
++export const PAGE_KEY = {
++  GAS: 'GAS',
++  ELECTRICITY: 'ELECTRICITY'
++}
++
++export const FIELD_KEY = {
++  BEFORE: 'before',
++  NOW: 'now',
++  TOTAL: 'total',
++  PRICE: 'price',
++  NDS: 'nds'
++}
+\ No newline at end of file

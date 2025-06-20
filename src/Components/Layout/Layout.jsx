@@ -15,10 +15,9 @@ export default function Layout() {
     { teplo: { total: 0, nds: 0 }, total: 0 },
     { water: { total: 0, nds: 0 }, total: 0 }
   );
-
-  return (
-    <div className="layout">
-      <Header />
+return (
+  <div className="layout">
+    <Header />
       <div className="navbar-outlet">
         <Navbar />
         <Outlet context={{ globalState, setGlobalState }} />
