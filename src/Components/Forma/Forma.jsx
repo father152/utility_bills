@@ -89,7 +89,7 @@ export default function Forma() {
           value={totalValue}
           readOnly
         ></input>{" "}
-        <p>{totalValue}</p> 
+        
       </div>
     </div>
   );

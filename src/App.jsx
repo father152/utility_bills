@@ -8,7 +8,7 @@ import Gas from "./Components/Navbar/Gas/Gas";
 import Elektr from "./Components/Navbar/Elektr/Elektr";
 import Teplo from "./Components/Navbar/Teplo/Teplo";
 import Rospodil from "./Components/Navbar/Rospodil/Rospodil";
-import Gek from "./Components/Navbar/Gek/Gek";
+
 
 
 
@@ -50,10 +50,7 @@ export default function App() {
           path: "rospodil",
           element: <Rospodil />,
         },
-        {
-          path: "gek",
-          element: <Gek />,
-        },
+        
       ],
     },
   ]);

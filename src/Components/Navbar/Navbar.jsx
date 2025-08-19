@@ -1,12 +1,12 @@
 import "./navbar.css";
 import { Link } from "react-router";
-import Gek from "./Gek/Gek";
-import { useLocation } from 'react-router-dom';
+
+
+
 
 export default function Navbar() {
   
-  const location = useLocation();
-  const receivedData = location.state?.data;
+  
   
   return (
     <div className="navbar">
@@ -15,9 +15,6 @@ export default function Navbar() {
       <div className="navbar__container">
         <div className="navbar__links">
           <ul>
-            <Link to="/gek">
-              <li>Послуги ЖЕУ</li>
-            </Link>
             <Link to="/elektr">
               <li>Електроенергія</li>
             </Link>
@@ -42,7 +39,7 @@ export default function Navbar() {
           </ul>
         </div>
         <div className="summary">
-          <label> Всього до cплати {receivedData}</label>
+          <label> Всього до cплати </label>
           
         </div>
       </div>
