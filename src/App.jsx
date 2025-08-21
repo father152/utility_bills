@@ -8,8 +8,10 @@ import Gas from "./Components/Navbar/Gas/Gas";
 import Elektr from "./Components/Navbar/Elektr/Elektr";
 import Teplo from "./Components/Navbar/Teplo/Teplo";
 import Rospodil from "./Components/Navbar/Rospodil/Rospodil";
-
-
+import About from "./Components/About/About";
+import News from "./Components/News/News";
+import Portfolio from "./Components/Portfolio/Portfolio";
+import Contacts from "./Components/Contacts/Contacts";
 
 
 export default function App() {
@@ -50,7 +52,22 @@ export default function App() {
           path: "rospodil",
           element: <Rospodil />,
         },
-        
+        {
+          path: "about",
+          element: <About />,
+        },
+       {
+          path: "news",
+          element: <News />,
+        }, 
+        {
+          path: "portfolio",
+          element: <Portfolio />,
+        }, 
+       {
+          path: "contacts",
+          element: <Contacts/>,
+        },  
       ],
     },
   ]);

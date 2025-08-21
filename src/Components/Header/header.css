@@ -1,6 +1,38 @@
-.header{
+.header {
     display: flex;
     width: 100%;
     height: 100px;
     background-color: #99b6f1;
+}
+.header img {
+    width: 100px;
+    height: 100px;
+    margin: 0 20px;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+.header__title {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+}
+.header__title ul {
+    display: flex;
+    justify-content: space-between;
+}
+.header__title li {
+    list-style: none;
+    font-size: 20px;
+    font-weight: 200;
+    color: #184e8b;
+    margin-left: 100px;
+
+}
+.header__title li:hover {
+    color: #fff;
+    cursor: pointer;
+} 
+.header__title a {
+    text-decoration: none;
 }
