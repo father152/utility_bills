@@ -1,7 +1,21 @@
 .golovna{
     display: flex;
     width: 75%;
-    height: calc(100% - 200px);
+    height: calc(160.5vh - 200px);
+    background-color: rgb(56, 56, 151);
     
+}
+.text {
+    width: 100%;
     
+   margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+   text-align: center;
+    justify-content: center;
+    padding: 50px 30px;
+color: rgb(206, 238, 25);
+}
+h4{
+    font-size: 20px;
 }
